@@ -99,15 +99,13 @@ export default function Footer() {
             <div style={logoText}>
               SamCo<span style={logoDot}>de.</span>
             </div>
-            <p style={descText}>
-              I am a software developer from Pakistan with 5+ years of
-              experience in companies and freelancing, building scalable apps
-              using React, Next.js, Node.js & Shopify.
-            </p>
+           <p style={descText}>
+  I'm a software developer from Pakistan, specializing in building scalable and efficient applications using React, Next.js, Node.js, and Shopify.
+</p>
+
           </div>
 
-          {/* Right Side Form */}
-          <form style={formStyle}>
+          {/* <form style={formStyle}>
             <input
               type="email"
               placeholder="Enter your email"
@@ -116,7 +114,7 @@ export default function Footer() {
             <button type="submit" style={buttonStyle}>
               Subscribe
             </button>
-          </form>
+          </form> */}
         </div>
 
         {/* Bottom */}

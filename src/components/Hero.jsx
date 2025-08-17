@@ -194,7 +194,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
         >
-          Passionate Full-Stack Developer specialized in React, Next.js, Redux, OOP, Node.js, Shopify Apps, SaaS Platforms, and Real-Time WebSockets.
+          Passionate Full-Stack Developer specialized in React, Next.js, Redux,  Node.js, Shopify Apps, SaaS Platforms, and Real-Time WebSockets.
           <br /> Building Scalable Web, Mobile, and Shopify Solutions.
         </motion.p>
 

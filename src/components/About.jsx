@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { motion, useAnimation } from "framer-motion";
 
 export default function About() {
   const sectionStyle = {
@@ -19,7 +19,7 @@ export default function About() {
 
   const containerMobile = {
     ...containerStyle,
-    gridTemplateColumns: "1fr", // mobile pe single column
+    gridTemplateColumns: "1fr",
     textAlign: "center",
   };
 
@@ -58,16 +58,15 @@ export default function About() {
     textAlign: "left",
   };
 
- const imageStyle = {
-  width: "100%",        // responsive
-  maxWidth: "400px",    // image ki max size control karega
-  height: "450px",      // ek fixed height
-  borderRadius: "16px",
-  objectFit: "cover",   // image crop hogi but shape maintain karegi
-  margin: "0 auto",     // center align
-  display: "block",
-};
-
+  const imageStyle = {
+    width: "100%",
+    maxWidth: "400px",
+    height: "450px",
+    borderRadius: "16px",
+    objectFit: "cover",
+    margin: "0 auto",
+    display: "block",
+  };
 
   const skillContainer = {
     margin: "25px 0",
@@ -100,6 +99,7 @@ export default function About() {
     flexWrap: "wrap",
     gap: "40px",
     textAlign: "center",
+    marginTop: "40px",
   };
 
   const counterItem = {
@@ -115,6 +115,26 @@ export default function About() {
     marginTop: "8px",
     color: "#ccc",
     letterSpacing: "1px",
+  };
+
+  // Counter logic
+  const Counter = ({ target }) => {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+      let start = 0;
+      const interval = setInterval(() => {
+        start += 1;
+        if (start > target) {
+          clearInterval(interval);
+        } else {
+          setCount(start);
+        }
+      }, 30); // speed control
+      return () => clearInterval(interval);
+    }, [target]);
+
+    return <div style={counterItem}>{count}+</div>;
   };
 
   return (
@@ -204,18 +224,18 @@ export default function About() {
         </motion.div>
       </div>
 
-      {/* Counters */}
+      {/* Animated Counters */}
       <div style={counters}>
         <div>
-          <div style={counterItem}>90+</div>
-          <div style={counterLabel}>Total projects</div>
+          <Counter target={90} />
+          <div style={counterLabel}>Total Projects</div>
         </div>
         <div>
-          <div style={counterItem}>90+</div>
+          <Counter target={90} />
           <div style={counterLabel}>Projects Completed</div>
         </div>
         <div>
-          <div style={counterItem}>15+</div>
+          <Counter target={15} />
           <div style={counterLabel}>Happy Clients</div>
         </div>
       </div>

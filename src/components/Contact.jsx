@@ -28,20 +28,19 @@ export default function Contact() {
       const result = await response.json();
 
       if (result.success) {
-        setStatus("✅ Message sent successfully!");
+        setStatus(" Message sent successfully!");
         form.current.reset();
       } else {
-        setStatus("❌ Failed to send. Try again!");
+        setStatus(" Failed to send. Try again!");
       }
     } catch (error) {
       console.error(error);
-      setStatus("⚠️ Server error. Please try later.");
+      setStatus(" Server error. Please try later.");
     } finally {
       setLoading(false);
     }
   };
 
-  // Styles
   const sectionStyle = {
     padding: "80px 20px",
     backgroundColor: "#0d0d0d",
@@ -121,7 +120,6 @@ export default function Contact() {
   return (
     <section id="contact" style={sectionStyle}>
       <div style={containerStyle}>
-        {/* Left Side */}
         <div>
           <h3 style={headingGradient}>Let’s talk</h3>
           <p style={textGray}>
@@ -130,7 +128,6 @@ export default function Contact() {
             can contact me anytime.
           </p>
 
-          {/* Email link */}
           <p style={infoItem}>
             <FaEnvelope style={iconStyle} />
             <a 
@@ -141,7 +138,6 @@ export default function Contact() {
             </a>
           </p>
 
-          {/* WhatsApp link */}
           <p style={infoItem}>
             <FaPhone style={iconStyle} />
             <a 
@@ -154,13 +150,11 @@ export default function Contact() {
             </a>
           </p>
 
-          {/* Location */}
           <p style={infoItem}>
             <FaMapMarkerAlt style={iconStyle} /> Islamabad, Pakistan
           </p>
         </div>
 
-        {/* Right Side */}
         <div>
           <h2 style={headingStyle}>
             Get in <span style={gradientSpan}>touch</span>
