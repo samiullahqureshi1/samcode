@@ -5,6 +5,14 @@ export default function Contact() {
   const form = useRef();
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // Resize listener for responsiveness
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const sendEmail = async (e) => {
     e.preventDefault();
@@ -26,23 +34,23 @@ export default function Contact() {
       });
 
       const result = await response.json();
-
       if (result.success) {
-        setStatus(" Message sent successfully!");
+        setStatus("✅ Message sent successfully!");
         form.current.reset();
       } else {
-        setStatus(" Failed to send. Try again!");
+        setStatus("❌ Failed to send. Try again!");
       }
     } catch (error) {
       console.error(error);
-      setStatus(" Server error. Please try later.");
+      setStatus("⚠️ Server error. Please try later.");
     } finally {
       setLoading(false);
     }
   };
 
+  // Styles
   const sectionStyle = {
-    padding: "80px 20px",
+    padding: "60px 20px",
     backgroundColor: "#0d0d0d",
     color: "#fff",
   };
@@ -51,8 +59,8 @@ export default function Contact() {
     maxWidth: "1200px",
     margin: "0 auto",
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "40px",
+    gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+    gap: "30px",
     alignItems: "flex-start",
   };
 
@@ -60,26 +68,29 @@ export default function Contact() {
     background: "linear-gradient(90deg, #a21caf, #f97316)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
-    fontSize: "40px",
+    fontSize: isMobile ? "28px" : "40px",
     fontWeight: "700",
     marginBottom: "20px",
+    textAlign: isMobile ? "center" : "left",
   };
 
-  const textGray = { color: "#ccc", lineHeight: "1.6", marginBottom: "20px" };
+  const textGray = { color: "#ccc", lineHeight: "1.6", marginBottom: "20px", textAlign: isMobile ? "center" : "left" };
 
   const infoItem = {
     display: "flex",
     alignItems: "center",
     gap: "12px",
     marginBottom: "12px",
+    justifyContent: isMobile ? "center" : "flex-start",
   };
 
   const iconStyle = { fontSize: "18px", color: "#f97316" };
 
   const headingStyle = {
-    fontSize: "36px",
+    fontSize: isMobile ? "28px" : "36px",
     fontWeight: "700",
     marginBottom: "20px",
+    textAlign: isMobile ? "center" : "left",
   };
 
   const gradientSpan = {
@@ -97,6 +108,7 @@ export default function Contact() {
     color: "#fff",
     marginBottom: "12px",
     outline: "none",
+    fontSize: "14px",
   };
 
   const textareaStyle = {
@@ -120,6 +132,7 @@ export default function Contact() {
   return (
     <section id="contact" style={sectionStyle}>
       <div style={containerStyle}>
+        {/* Left Side */}
         <div>
           <h3 style={headingGradient}>Let’s talk</h3>
           <p style={textGray}>
@@ -155,6 +168,7 @@ export default function Contact() {
           </p>
         </div>
 
+        {/* Right Side */}
         <div>
           <h2 style={headingStyle}>
             Get in <span style={gradientSpan}>touch</span>
@@ -169,7 +183,7 @@ export default function Contact() {
             </button>
           </form>
 
-          {status && <p style={{ marginTop: "12px", color: "#22d3ee" }}>{status}</p>}
+          {status && <p style={{ marginTop: "12px", color: "#22d3ee", textAlign: isMobile ? "center" : "left" }}>{status}</p>}
         </div>
       </div>
     </section>

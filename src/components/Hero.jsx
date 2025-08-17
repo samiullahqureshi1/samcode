@@ -133,9 +133,11 @@ export default function Hero() {
         {/* Desktop Menu */}
         <ul
           className="desktop-menu"
-          style={window.innerWidth > 768 ? navLinksDesktop : { display: "none" }}
+          style={
+            window.innerWidth > 768 ? navLinksDesktop : { display: "none" }
+          }
         >
-          {["Home", "About Me",  "Projects", "Services",  "Contact"].map(
+          {["Home", "About Me", "Projects", "Services", "Contact"].map(
             (item, i) => (
               <motion.li
                 key={i}
@@ -194,7 +196,8 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
         >
-          Passionate Full-Stack Developer specialized in React, Next.js, Redux,  Node.js, Shopify Apps, SaaS Platforms, and Real-Time WebSockets.
+          Passionate Full-Stack Developer specialized in React, Next.js, Redux,
+          Node.js, Shopify Apps, SaaS Platforms, and Real-Time WebSockets.
           <br /> Building Scalable Web, Mobile, and Shopify Solutions.
         </motion.p>
 
@@ -208,13 +211,24 @@ export default function Hero() {
             style={gradientBtn}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              document.getElementById("contact").scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
           >
             Hire Me
           </motion.button>
+
           <motion.button
             style={outlineBtn}
             whileHover={{ backgroundColor: "#fff", color: "#000" }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              document.getElementById("projects").scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
           >
             View Projects
           </motion.button>
