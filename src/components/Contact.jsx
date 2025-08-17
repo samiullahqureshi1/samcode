@@ -1,19 +1,44 @@
-import React, { useRef } from "react";
-import emailjs from "emailjs-com";
+import React, { useRef, useState } from "react";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Contact() {
   const form = useRef();
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("");
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
-    emailjs.sendForm(
-      "YOUR_SERVICE_ID",
-      "YOUR_TEMPLATE_ID",
-      form.current,
-      "YOUR_USER_ID"
-    );
-    e.target.reset();
+    setLoading(true);
+    setStatus("");
+
+    const formData = new FormData(form.current);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const response = await fetch("https://trackify-backend-nine.vercel.app/consultation/portfolio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setStatus("✅ Message sent successfully!");
+        form.current.reset();
+      } else {
+        setStatus("❌ Failed to send. Try again!");
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus("⚠️ Server error. Please try later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Styles
@@ -81,16 +106,6 @@ export default function Contact() {
     resize: "none",
   };
 
-  const captchaStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    background: "#1e1e2f",
-    padding: "10px",
-    borderRadius: "6px",
-    marginBottom: "12px",
-  };
-
   const buttonStyle = {
     width: "100%",
     padding: "14px",
@@ -115,12 +130,31 @@ export default function Contact() {
             can contact me anytime.
           </p>
 
+          {/* Email link */}
           <p style={infoItem}>
-            <FaEnvelope style={iconStyle} /> samiullahqureshi669@gmail.com
+            <FaEnvelope style={iconStyle} />
+            <a 
+              href="mailto:samiullahqureshi669@gmail.com" 
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              samiullahqureshi669@gmail.com
+            </a>
           </p>
+
+          {/* WhatsApp link */}
           <p style={infoItem}>
-            <FaPhone style={iconStyle} /> +92 3160054922
+            <FaPhone style={iconStyle} />
+            <a 
+              href="https://wa.me/923160054922" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              +92 3160054922
+            </a>
           </p>
+
+          {/* Location */}
           <p style={infoItem}>
             <FaMapMarkerAlt style={iconStyle} /> Islamabad, Pakistan
           </p>
@@ -136,10 +170,12 @@ export default function Contact() {
             <input type="email" name="email" placeholder="Your Email" style={inputStyle} required />
             <textarea name="message" placeholder="Write your message here" style={textareaStyle} required></textarea>
 
-           
-
-            <button type="submit" style={buttonStyle}>Submit now</button>
+            <button type="submit" style={buttonStyle} disabled={loading}>
+              {loading ? "Sending..." : "Submit now"}
+            </button>
           </form>
+
+          {status && <p style={{ marginTop: "12px", color: "#22d3ee" }}>{status}</p>}
         </div>
       </div>
     </section>

@@ -135,7 +135,7 @@ export default function Hero() {
           className="desktop-menu"
           style={window.innerWidth > 768 ? navLinksDesktop : { display: "none" }}
         >
-          {["Home", "About Me", "Skills", "Projects", "Services", "Testimonials", "Contact"].map(
+          {["Home", "About Me",  "Projects", "Services",  "Contact"].map(
             (item, i) => (
               <motion.li
                 key={i}
@@ -159,7 +159,7 @@ export default function Hero() {
       <div>
         {/* Profile Image */}
         <motion.img
-          src="/sami.png"
+          src="/samiullah.jpg"
           alt="SamCode"
           style={profileImage}
           initial={{ scale: 0, opacity: 0 }}
@@ -173,7 +173,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          I'm <span style={gradientText}>SamCode</span>, <br />
+          I'm <span style={gradientText}>Samiullah Qureshi</span>, <br />
           <ReactTyped
             strings={[
               "a Software Developer",

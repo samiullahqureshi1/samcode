@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 const projects = [
@@ -6,11 +6,19 @@ const projects = [
   { title: "Shopify Store Control Panel", img: "/trackify.png" },
   { title: "Shopify Bulk Uploader", img: "/bulkuploader.png" },
   { title: "E-commerce Store (NearMart)", img: "/nearmart.png" },
-  { title: "MedSpa Website (Next.js)", img: "/nearmart.png" },
+  { title: "Ecommerce Website (Next.js)", img: "/ecommerece.png" },
   { title: "Multi-Vendor Marketplace", img: "/multi-vendor.png" },
+  { title: "AI Chatbot", img: "/ai-chat.png" },
+  { title: "POS System", img: "/pos.png" },
+  { title: "HRMS Portal", img: "/hrm.png" },
+    { title: "Animated Portfolio", img: "/portfolio.png" },
+        { title: "Car Selling (Next.js)", img: "/carselling.png" },
+
 ];
 
 export default function Projects() {
+  const [showAll, setShowAll] = useState(false);
+
   const sectionStyle = {
     padding: "80px 20px",
     backgroundColor: "#0d0d0d",
@@ -105,7 +113,7 @@ export default function Projects() {
 
       {/* Projects Grid */}
       <div style={gridStyle}>
-        {projects.map((p, i) => (
+        {(showAll ? projects : projects.slice(0, 6)).map((p, i) => (
           <motion.div
             key={i}
             style={cardStyle}
@@ -117,13 +125,14 @@ export default function Projects() {
         ))}
       </div>
 
-      {/* Show More Button */}
+      {/* Show More / Show Less Button */}
       <motion.button
         style={buttonStyle}
         whileHover={{ scale: 1.05, backgroundColor: "#fff", color: "#000" }}
         whileTap={{ scale: 0.95 }}
+        onClick={() => setShowAll(!showAll)}
       >
-        Show More →
+        {showAll ? "Show Less ↑" : "View All →"}
       </motion.button>
     </section>
   );

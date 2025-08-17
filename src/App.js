@@ -8,6 +8,7 @@ import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { Element } from "react-scroll";
+import ChatbotPage from "./components/Chatbot";
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
       <Element name="contact">
         <Contact />
       </Element>
+       
       <Footer />
     </div>
   );

@@ -58,11 +58,16 @@ export default function About() {
     textAlign: "left",
   };
 
-  const imageStyle = {
-    width: "100%",
-    borderRadius: "16px",
-    objectFit: "cover",
-  };
+ const imageStyle = {
+  width: "100%",        // responsive
+  maxWidth: "400px",    // image ki max size control karega
+  height: "450px",      // ek fixed height
+  borderRadius: "16px",
+  objectFit: "cover",   // image crop hogi but shape maintain karegi
+  margin: "0 auto",     // center align
+  display: "block",
+};
+
 
   const skillContainer = {
     margin: "25px 0",
@@ -113,7 +118,7 @@ export default function About() {
   };
 
   return (
-    <section id="about" style={sectionStyle}>
+    <section id="aboutme" style={sectionStyle}>
       {/* Heading */}
       <div style={headingWrapper}>
         <h2 style={headingStyle}>
@@ -128,7 +133,7 @@ export default function About() {
       >
         {/* Profile Image */}
         <motion.img
-          src="/sami.png"
+          src="/samiullah.jpg"
           alt="SamCode"
           style={imageStyle}
           initial={{ opacity: 0, x: -50 }}
@@ -202,8 +207,8 @@ export default function About() {
       {/* Counters */}
       <div style={counters}>
         <div>
-          <div style={counterItem}>10+</div>
-          <div style={counterLabel}>Years of Experience</div>
+          <div style={counterItem}>90+</div>
+          <div style={counterLabel}>Total projects</div>
         </div>
         <div>
           <div style={counterItem}>90+</div>
